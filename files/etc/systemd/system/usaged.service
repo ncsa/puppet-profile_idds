@@ -1,0 +1,13 @@
+[Unit]
+Description=IDDS Usage Daemon
+Documentation=
+[Service]
+Type=simple
+User=acctd
+ExecStart=/home/acctd/usage/usaged.pl
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+KillSignal=SIGINT
+TimeoutSec=0
+[Install]
+WantedBy=multi-user.target
