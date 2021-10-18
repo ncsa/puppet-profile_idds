@@ -7,9 +7,14 @@
 ### Classes
 
 * [`profile_idds`](#profile_idds): Configure IDDS services, etc
-* [`profile_idds::firewall`](#profile_iddsfirewall)
+* [`profile_idds::firewall`](#profile_iddsfirewall): Set up the firewall for the server
 * [`profile_idds::services`](#profile_iddsservices): Configure IDDS services
+* [`profile_idds::ssh`](#profile_iddsssh): Allow ssh for service type accounts
 * [`profile_idds::users`](#profile_iddsusers): Configure IDDS service users
+
+### Functions
+
+* [`profile_idds::add_firewall_entries`](#profile_iddsadd_firewall_entries)
 
 ## Classes
 
@@ -27,7 +32,15 @@ include profile_idds
 
 ### <a name="profile_iddsfirewall"></a>`profile_idds::firewall`
 
-The profile_idds::firewall class.
+Set up the firewall for the server
+
+#### Examples
+
+##### 
+
+```puppet
+include profile_idds::firewall
+```
 
 #### Parameters
 
@@ -39,7 +52,8 @@ The following parameters are available in the `profile_idds::firewall` class:
 
 Data type: `Hash`
 
-
+The parameter is a hash of hashes.
+Each contained hash should start with 2 entries: "NAME' and 'PORT'.
 
 ### <a name="profile_iddsservices"></a>`profile_idds::services`
 
@@ -53,6 +67,65 @@ Configure IDDS services
 include profile_idds::services
 ```
 
+### <a name="profile_iddsssh"></a>`profile_idds::ssh`
+
+Allow ssh for service type accounts
+
+#### Examples
+
+##### 
+
+```puppet
+include profile_idds::ssh
+```
+
+#### Parameters
+
+The following parameters are available in the `profile_idds::ssh` class:
+
+* [`acctd_subnets`](#acctd_subnets)
+* [`acctd_groups`](#acctd_groups)
+* [`acctd_users`](#acctd_users)
+* [`dev_subnets`](#dev_subnets)
+* [`dev_groups`](#dev_groups)
+* [`dev_users`](#dev_users)
+
+##### <a name="acctd_subnets"></a>`acctd_subnets`
+
+Data type: `Any`
+
+List of subnets that acctd can ssh from
+
+##### <a name="acctd_groups"></a>`acctd_groups`
+
+Data type: `Any`
+
+List of groups that are allowed for acctd ssh access
+
+##### <a name="acctd_users"></a>`acctd_users`
+
+Data type: `Any`
+
+List of users that are allowed for acctd ssh access
+
+##### <a name="dev_subnets"></a>`dev_subnets`
+
+Data type: `Any`
+
+List of subnets that developer service users can ssh from
+
+##### <a name="dev_groups"></a>`dev_groups`
+
+Data type: `Any`
+
+List of developer service groups that are allowed for ssh access
+
+##### <a name="dev_users"></a>`dev_users`
+
+Data type: `Any`
+
+List of developer service users that are allowed for ssh access
+
 ### <a name="profile_iddsusers"></a>`profile_idds::users`
 
 Configure IDDS service users
@@ -64,4 +137,24 @@ Configure IDDS service users
 ```puppet
 include profile_idds::users
 ```
+
+## Functions
+
+### <a name="profile_iddsadd_firewall_entries"></a>`profile_idds::add_firewall_entries`
+
+Type: Puppet Language
+
+The profile_idds::add_firewall_entries function.
+
+#### `profile_idds::add_firewall_entries(Hash $address_hash)`
+
+The profile_idds::add_firewall_entries function.
+
+Returns: `Any`
+
+##### `address_hash`
+
+Data type: `Hash`
+
+
 

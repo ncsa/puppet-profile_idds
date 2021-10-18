@@ -17,11 +17,30 @@ include profile_idds
 
 The following parameters need to be set in hiera:
 ```
-...tbd...
+profile_idds::firewall::firewall_hash:
+  allowed_db:
+    NAME: "postgres"
+    PORT: "5432"
+    Example subnet: "141.142.100.1/24"
+  allowed_usaged:
+    NAME: "usaged"
+    PORT: "7703"
+    Example subnet: "141.142.100.1/24"
+  allowed_secure_web:
+    NAME: "https"
+    PORT: "443"
+    Example subnet: "141.142.100.1/24"
+  allowed_web:
+    NAME: "http"
+    PORT: "80"
+    Example subnet: "141.142.100.1/24"
+
+profile_idds::ssh::acctd_subnets:
+  - "141.142.100.1/24"  # Example subnet
 ```
 
 ## Dependencies
-- tbd
+n/a
 
 ## Reference
 
