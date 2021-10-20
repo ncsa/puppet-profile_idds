@@ -10,13 +10,9 @@ profile_idds::ssh::acctd_users:
 
 profile_idds::ssh::dev_subnets:
   - "141.142.146.0/24"  # NCSA VPN
-  - "141.142.197.4"     # idds-vm.ncsa.illinois.edu
   - "141.142.197.5"     # idds-prod.ncsa.illinois.edu
   - "141.142.197.6"     # idds-test.ncsa.illinois.edu
-  - "141.142.197.8"     # idds-vm-cpond.ncsa.illinois.edu CAN REMOVE
   - "141.142.197.9"     # idds-prod-backup.ncsa.illinois.edu
-  - "141.142.197.12"    # idds-vm-speckins.ncsa.illinois.edu CAN REMOVE
-  - "141.142.197.14"    # idds-vm-scontre2.ncsa.illinois.edu CAN REMOVE
 
 profile_idds::ssh::dev_groups:
   - "deploy"
