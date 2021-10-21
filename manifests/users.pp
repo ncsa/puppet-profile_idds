@@ -15,6 +15,17 @@ class profile_idds::users {
     shell          => '/bin/bash',
     system         => 'true'
   }
+  user { 'amie':
+    ensure         => 'present',
+    name           => 'amie',
+    comment        => 'XSEDE amie api',
+    home           => '/home/amie',
+    managehome     => 'true',
+    password       => '!!',
+    purge_ssh_keys => 'false',
+    shell          => '/bin/bash',
+    system         => 'false'
+  }
   user { 'deploy':
     ensure         => 'present',
     name           => 'deploy',

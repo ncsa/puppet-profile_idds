@@ -1,6 +1,6 @@
 ---
 profile_idds::ssh::acctd_subnets:
-  - "127.0.0.1"
+  - "127.0.0.1"  # localhost
 
 profile_idds::ssh::acctd_groups:
   - "acctd"
@@ -10,9 +10,9 @@ profile_idds::ssh::acctd_users:
 
 profile_idds::ssh::dev_subnets:
   - "141.142.146.0/24"  # NCSA VPN
-  - "141.142.197.5"     # idds-prod.ncsa.illinois.edu
-  - "141.142.197.6"     # idds-test.ncsa.illinois.edu
-  - "141.142.197.9"     # idds-prod-backup.ncsa.illinois.edu
+  - "141.142.197.5"     # IDDS servers (idds-prod)
+  - "141.142.197.9"     # IDDS servers (idds-prod-backup)
+  - "141.142.197.6"     # IDDS servers (idds-test)
 
 profile_idds::ssh::dev_groups:
   - "deploy"

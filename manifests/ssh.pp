@@ -50,7 +50,6 @@ class profile_idds::ssh (
     additional_match_params => $params,
   }
 
-
   ## IF $dev_groups CONTAINS GROUP git
   if ( 'git' in $dev_groups ) {
     # ALSO NEED access.conf ENTRY FOR ORIGIN 'ALL EXCEPT LOCAL'
@@ -75,4 +74,3 @@ class profile_idds::ssh (
   }
 
 }
-

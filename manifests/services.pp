@@ -20,15 +20,24 @@ class profile_idds::services {
     mode   => '0664',
   }
 
-  service { 'usaged':
+  # FROM https://jira.ncsa.illinois.edu/browse/SVC-4552
+  #   usaged only needs to run on idds-prod
+  #   since the usage script is configured to run sockets to idds-prod
+  if ($facts['hostname'] == 'idds-prod') {
+    service { 'usaged':
       ensure  => running,
       enable  => true,
       require => File['/etc/systemd/system/usaged.service'],
+    }
+    # Set cron to sleep 10 minutes then restart usaged after a reboot.
+    cron { 'restart_usaged':
+      command => '( sleep 10m && systemctl restart usaged)',
+      special => 'reboot',
+    }
+  } else {
+    cron { 'restart_usaged':
+      ensure => 'absent',
+    }
   }
 
-# Set cron to sleep 10 minutes then restart usaged after a reboot.
-  cron { 'restart_usaged':
-    command => '( sleep 10m && systemctl restart usaged)',
-    special => 'reboot',
-  }
 }
