@@ -37,6 +37,16 @@ class profile_idds::users {
     system         => 'true'
   }
 
+  # ALLOW USERS TO RUN CRON
+  pam_access::entry { 'amie-cron':
+    user   => 'amie',
+    origin => 'cron',
+  }
+  pam_access::entry { 'deploy-cron':
+    user   => 'deploy',
+    origin => 'cron',
+  }
+
   file {'/home/postgres':
     ensure => 'directory',
     owner  => 'postgres',
