@@ -36,6 +36,26 @@ class profile_idds::users {
     shell          => '/bin/bash',
     system         => 'true'
   }
+  group { 'grp_202':
+    ensure     => 'present',
+    name       => 'grp_202',
+    forcelocal => true,
+    gid        => '202',
+  }
+  user { 'postgres':
+    ensure         => 'present',
+    name           => 'postgres',
+    forcelocal     => true,
+    gid            => '202',
+    home           => '/home/postgres',
+    managehome     => false,
+    #managehome     => true,
+    password       => '!!',
+    purge_ssh_keys => 'false',
+    shell          => '/sbin/nologin',
+    #system         => 'true'
+    uid            => '54048',
+  }
 
   # ALLOW USERS TO RUN CRON
   pam_access::entry { 'amie-cron':
@@ -54,6 +74,9 @@ class profile_idds::users {
     mode   => '0750'
   }
 
+  ## WHY IS THE FOLLOWING HERE?          - wglick 2022-01-20
+  ## - THE postgres USER CANNOT SSH INTO ANY IDDS SERVERS
+  ## - GUESS IT COULD SSH FROM THE IDDS SERVER, BUT NOT CONVINCED IT NEEDS TO
   file {'/home/postgres/.ssh':
     ensure => 'directory',
     owner  => 'postgres',
@@ -61,16 +84,4 @@ class profile_idds::users {
     mode   => '0700'
   }
 
-  if ($facts['hostname'] != 'idds-prod') {
-    user { 'git':
-      ensure         => 'present',
-      name           => 'git',
-      home           => '/home/git',
-      managehome     => 'true',
-      password       => '!!',
-      purge_ssh_keys => 'false',
-      shell          => '/bin/bash',
-      system         => 'true'
-    }
-  }
 }
