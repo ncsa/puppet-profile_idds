@@ -50,27 +50,4 @@ class profile_idds::ssh (
     additional_match_params => $params,
   }
 
-  ## IF $dev_groups CONTAINS GROUP git
-  if ( 'git' in $dev_groups ) {
-    # ALSO NEED access.conf ENTRY FOR ORIGIN 'ALL EXCEPT LOCAL'
-    # pam_access DOES NOT ALLOW FOR 'ALL EXCEPT LOCAL' SO USING 'ALL'
-    pam_access::entry { 'Allow group git access from ALL':
-      group      => 'git',
-      origin     => 'ALL',
-      permission => '+',
-      position   => '-1',
-    }
-  }
-  ## IF $dev_users CONTAINS USER git
-  if ( 'git' in $dev_users ) {
-    # ALSO NEED access.conf ENTRY FOR ORIGIN 'ALL EXCEPT LOCAL'
-    # pam_access DOES NOT ALLOW FOR 'ALL EXCEPT LOCAL' SO USING 'ALL'
-    pam_access::entry { 'Allow user git access from ALL':
-      user       => 'git',
-      origin     => 'ALL',
-      permission => '+',
-      position   => '-1',
-    }
-  }
-
 }

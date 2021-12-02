@@ -16,8 +16,6 @@ profile_idds::ssh::dev_subnets:
 
 profile_idds::ssh::dev_groups:
   - "deploy"
-  - "git"
 
 profile_idds::ssh::dev_users:
   - "deploy"
-  - "git"
