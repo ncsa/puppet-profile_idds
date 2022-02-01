@@ -22,10 +22,6 @@ profile_idds::firewall::firewall_hash:
     NAME: "postgres"
     PORT: "5432"
     Example subnet: "141.142.100.1/24"
-  allowed_usaged:
-    NAME: "usaged"
-    PORT: "7703"
-    Example subnet: "141.142.100.1/24"
   allowed_secure_web:
     NAME: "https"
     PORT: "443"
