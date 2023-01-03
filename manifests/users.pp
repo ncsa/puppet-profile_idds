@@ -18,7 +18,7 @@ class profile_idds::users {
   user { 'amie':
     ensure         => 'present',
     name           => 'amie',
-    comment        => 'XSEDE amie api',
+    comment        => 'NCSA amie',
     home           => '/home/amie',
     managehome     => 'true',
     password       => '!!',
