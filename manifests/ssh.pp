@@ -21,14 +21,13 @@
 # @example
 #   include profile_idds::ssh
 class profile_idds::ssh (
-  $acctd_subnets,
-  $acctd_groups,
-  $acctd_users,
-  $dev_subnets,
-  $dev_users,
-  $dev_groups,
-){
-
+  Array[String] $acctd_subnets,
+  Array[String] $acctd_groups,
+  Array[String] $acctd_users,
+  Array[String] $dev_subnets,
+  Array[String] $dev_users,
+  Array[String] $dev_groups,
+) {
   $params = {
     'PubkeyAuthentication'  => 'yes',
     'AuthenticationMethods' => 'publickey',
@@ -36,18 +35,17 @@ class profile_idds::ssh (
     'X11Forwarding'         => 'no',
   }
 
-  ::sshd::allow_from{ 'sshd allow acctd access from acctd clients':
+  ::sshd::allow_from { 'sshd allow acctd access from acctd clients':
     hostlist                => $acctd_subnets,
     groups                  => $acctd_groups,
     users                   => $acctd_users,
     additional_match_params => $params,
   }
 
-  ::sshd::allow_from{ 'sshd allow developer service users access from dev nodes':
+  ::sshd::allow_from { 'sshd allow developer service users access from dev nodes':
     hostlist                => $dev_subnets,
     groups                  => $dev_groups,
     users                   => $dev_users,
     additional_match_params => $params,
   }
-
 }
