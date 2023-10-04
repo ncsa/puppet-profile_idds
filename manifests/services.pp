@@ -3,16 +3,15 @@
 # @example
 #   include profile_idds::services
 class profile_idds::services {
-
   file { '/etc/systemd/system/postgresql.service':
     source => "puppet:///modules/${module_name}/etc/systemd/system/postgresql.service",
     mode   => '0664',
   }
 
   service { 'postgresql':
-      ensure  => running,
-      enable  => true,
-      require => File['/etc/systemd/system/postgresql.service'],
+    ensure  => running,
+    enable  => true,
+    require => File['/etc/systemd/system/postgresql.service'],
   }
 
   # FROM https://jira.ncsa.illinois.edu/browse/SVC-11468
@@ -27,5 +26,4 @@ class profile_idds::services {
     ensure => stopped,
     enable => false,
   }
-
 }

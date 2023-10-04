@@ -9,10 +9,7 @@
 class profile_idds::firewall (
   Hash $firewall_hash,
 ) {
-
-  $firewall_hash.each | $tag, $sub_hash |
-  {
+  $firewall_hash.each | $tag, $sub_hash | {
     profile_idds::add_firewall_entries($sub_hash)
   }
-
 }

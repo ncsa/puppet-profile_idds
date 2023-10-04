@@ -3,7 +3,6 @@
 # @example
 #   include profile_idds::users
 class profile_idds::users {
-
   user { 'acctd':
     ensure         => 'present',
     name           => 'acctd',
@@ -13,7 +12,7 @@ class profile_idds::users {
     password       => '!!',
     purge_ssh_keys => 'false',
     shell          => '/bin/bash',
-    system         => 'true'
+    system         => 'true',
   }
   user { 'amie':
     ensure         => 'present',
@@ -24,7 +23,7 @@ class profile_idds::users {
     password       => '!!',
     purge_ssh_keys => 'false',
     shell          => '/bin/bash',
-    system         => 'false'
+    system         => 'true',
   }
   user { 'deploy':
     ensure         => 'present',
@@ -34,7 +33,7 @@ class profile_idds::users {
     password       => '!!',
     purge_ssh_keys => 'false',
     shell          => '/bin/bash',
-    system         => 'true'
+    system         => 'true',
   }
   group { 'grp_202':
     ensure     => 'present',
@@ -56,6 +55,17 @@ class profile_idds::users {
     #system         => 'true'
     uid            => '54048',
   }
+  user { 'svna':
+    ensure         => 'present',
+    name           => 'svna',
+    comment        => 'NCSA svna',
+    home           => '/home/svna',
+    managehome     => 'true',
+    password       => '!!',
+    purge_ssh_keys => 'false',
+    shell          => '/bin/bash',
+    system         => 'true',
+  }
 
   # ALLOW USERS TO RUN CRON
   pam_access::entry { 'amie-cron':
@@ -67,21 +77,20 @@ class profile_idds::users {
     origin => 'cron',
   }
 
-  file {'/home/postgres':
+  file { '/home/postgres':
     ensure => 'directory',
     owner  => 'postgres',
     group  => 'grp_202',
-    mode   => '0750'
+    mode   => '0750',
   }
 
   ## WHY IS THE FOLLOWING HERE?          - wglick 2022-01-20
   ## - THE postgres USER CANNOT SSH INTO ANY IDDS SERVERS
   ## - GUESS IT COULD SSH FROM THE IDDS SERVER, BUT NOT CONVINCED IT NEEDS TO
-  file {'/home/postgres/.ssh':
+  file { '/home/postgres/.ssh':
     ensure => 'directory',
     owner  => 'postgres',
     group  => 'grp_202',
-    mode   => '0700'
+    mode   => '0700',
   }
-
 }
