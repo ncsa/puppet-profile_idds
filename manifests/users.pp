@@ -76,6 +76,10 @@ class profile_idds::users {
     user   => 'deploy',
     origin => 'cron',
   }
+  pam_access::entry { 'svna-cron':
+    user   => 'svna',
+    origin => 'cron',
+  }
 
   file { '/home/postgres':
     ensure => 'directory',
